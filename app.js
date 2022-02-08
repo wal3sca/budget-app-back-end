@@ -21,4 +21,14 @@ app.get("*", (req, res) => {
   res.status(404).json({ error: "Page not found" });
 });
 
+app.delete("/transactions/:index", (request, response) => {
+  if (transactionsArray[request.params.index]) {
+    const [deletedTransaction] = transactionsArray.splice(
+      request.params.index,
+      1
+    );
+    response.status(200).json(deletedTransaction);
+  }
+});
+
 module.exports = app;
